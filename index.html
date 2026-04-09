@@ -1,0 +1,532 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espacio Uno Arquitectura</title>
+  <meta
+    name="description"
+    content="Espacio UNO Arquitectura. Diseñamos y construimos espacios a medida: proyectos desde cero, remodelaciones, interiorismo y dirección técnica."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Mulish:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --brand-orange: #d9773e;
+      --brand-orange-soft: #e79a63;
+      --brand-charcoal: #15181c;
+      --brand-charcoal-soft: #232a32;
+      --brand-cream: #f4f1ed;
+      --brand-white: #ffffff;
+      --max-width: 1120px;
+      --radius: 16px;
+      --shadow-soft: 0 20px 55px rgba(0, 0, 0, 0.18);
+      --section-pad: clamp(68px, 8vw, 110px);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Mulish", sans-serif;
+      color: var(--brand-cream);
+      background: radial-gradient(circle at 10% 5%, #2a3542 0%, #101418 45%, #0a0d10 100%);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .shell::before,
+    .shell::after {
+      content: "";
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(70px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .shell::before {
+      background: rgba(215, 119, 62, 0.2);
+      top: -220px;
+      right: -120px;
+    }
+
+    .shell::after {
+      background: rgba(255, 255, 255, 0.06);
+      bottom: -220px;
+      left: -120px;
+    }
+
+    .container {
+      width: min(var(--max-width), 92vw);
+      margin: 0 auto;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: rise 0.75s ease forwards;
+    }
+
+    .reveal:nth-child(2) { animation-delay: 0.12s; }
+    .reveal:nth-child(3) { animation-delay: 0.24s; }
+    .reveal:nth-child(4) { animation-delay: 0.36s; }
+
+    @keyframes rise {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(13, 17, 22, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 76px;
+      gap: 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo img {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .logo-text {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      line-height: 1.15;
+    }
+
+    .menu {
+      display: flex;
+      gap: 18px;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .menu a {
+      opacity: 0.86;
+      transition: opacity 0.25s ease;
+    }
+
+    .menu a:hover,
+    .menu a:focus-visible {
+      opacity: 1;
+    }
+
+    .hero {
+      padding: clamp(70px, 10vw, 125px) 0 var(--section-pad);
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: clamp(28px, 4vw, 52px);
+    }
+
+    .hero h1 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(2rem, 4.2vw, 4.1rem);
+      line-height: 1.08;
+      margin-bottom: 24px;
+      max-width: 13ch;
+      text-wrap: balance;
+    }
+
+    .hero h1 strong {
+      color: var(--brand-orange-soft);
+      font-weight: 700;
+    }
+
+    .hero p {
+      color: rgba(244, 241, 237, 0.9);
+      max-width: 46ch;
+      font-size: clamp(1rem, 1.45vw, 1.15rem);
+      margin-bottom: 34px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--brand-orange);
+      color: #1f130c;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      transform: translateY(-2px);
+      background: #e3864c;
+    }
+
+    .btn-secondary {
+      border-color: rgba(244, 241, 237, 0.35);
+      color: var(--brand-cream);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(244, 241, 237, 0.68);
+    }
+
+    .hero-card {
+      min-height: 500px;
+      border-radius: calc(var(--radius) + 6px);
+      box-shadow: var(--shadow-soft);
+      background:
+        linear-gradient(180deg, rgba(10, 13, 16, 0.05) 10%, rgba(10, 13, 16, 0.78) 100%),
+        url('assets/servicios.jpg') center/cover;
+      padding: clamp(26px, 3vw, 36px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .hero-card p {
+      margin: 0;
+      max-width: 30ch;
+      font-size: 1rem;
+      color: rgba(244, 241, 237, 0.95);
+    }
+
+    .hero-card .line {
+      width: 84px;
+      height: 2px;
+      background: rgba(244, 241, 237, 0.85);
+      margin: 12px 0 16px;
+    }
+
+    .section {
+      padding: var(--section-pad) 0;
+    }
+
+    .section-title {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(1.55rem, 2.8vw, 2.7rem);
+      margin-bottom: 14px;
+      letter-spacing: 0.01em;
+    }
+
+    .section-subtitle {
+      max-width: 64ch;
+      color: rgba(244, 241, 237, 0.8);
+      margin-bottom: 36px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .service {
+      background: linear-gradient(145deg, rgba(35, 42, 50, 0.68), rgba(19, 24, 30, 0.72));
+      border-radius: var(--radius);
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      min-height: 144px;
+    }
+
+    .service h3 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+      color: var(--brand-white);
+    }
+
+    .service p {
+      font-size: 0.95rem;
+      color: rgba(244, 241, 237, 0.82);
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .step {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .step span {
+      display: inline-block;
+      color: var(--brand-orange-soft);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.74rem;
+      margin-bottom: 9px;
+    }
+
+    .step h4 {
+      font-family: "Montserrat", sans-serif;
+      margin-bottom: 8px;
+      font-size: 1.08rem;
+    }
+
+    .contact {
+      background:
+        linear-gradient(145deg, rgba(16, 20, 24, 0.92), rgba(37, 44, 53, 0.9)),
+        url('assets/contacto.jpg') center/cover;
+      border-radius: calc(var(--radius) + 6px);
+      padding: clamp(28px, 4vw, 44px);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .contact h3 {
+      font-family: "Montserrat", sans-serif;
+      font-size: clamp(1.25rem, 2.2vw, 1.9rem);
+      margin-bottom: 6px;
+    }
+
+    .contact p {
+      color: rgba(244, 241, 237, 0.82);
+      max-width: 46ch;
+    }
+
+    footer {
+      padding: 36px 0 28px;
+      text-align: center;
+      color: rgba(244, 241, 237, 0.68);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        min-height: 380px;
+      }
+
+      .services-grid,
+      .process {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .contact {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .menu {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 52px;
+      }
+
+      .services-grid,
+      .process {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        min-height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="container nav">
+        <a href="#inicio" class="logo" aria-label="Espacio Uno Arquitectura">
+          <img src="assets/logo.png" alt="Logo Espacio Uno Arquitectura" />
+          <span class="logo-text">Espacio UNO<br />Arquitectura</span>
+        </a>
+
+        <nav class="menu" aria-label="Navegación principal">
+          <a href="#servicios">Servicios</a>
+          <a href="#proceso">Proceso</a>
+          <a href="#contacto">Contacto</a>
+          <a href="https://www.instagram.com/espaciounoarquitectura" target="_blank" rel="noreferrer">Instagram</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="inicio" class="container hero">
+        <div>
+          <h1 class="reveal">Donde el diseño <strong>se completa con vos</strong></h1>
+          <p class="reveal">
+            Hacemos arquitectura pensada para vos, desde entender cómo vivís y qué te hace único.
+          </p>
+          <div class="cta-row reveal">
+            <a class="btn btn-primary" href="#contacto">Quiero mi proyecto</a>
+            <a class="btn btn-secondary" href="#servicios">Ver servicios</a>
+          </div>
+        </div>
+
+        <article class="hero-card reveal" aria-label="Tarjeta destacada de Espacio Uno Arquitectura">
+          <p>Hacemos arquitectura pensada para vos, desde entender cómo vivís y qué te hace único.</p>
+          <div class="line"></div>
+          <p>Diseñamos y construimos junto a vos, cuidando cada detalle que te representa.</p>
+        </article>
+      </section>
+
+      <section id="servicios" class="section">
+        <div class="container">
+          <h2 class="section-title">Nuestros Servicios</h2>
+          <p class="section-subtitle">
+            Soluciones integrales para vivienda, locales y espacios interiores, con enfoque técnico y estético.
+          </p>
+
+          <div class="services-grid">
+            <article class="service">
+              <h3>Proyectos Desde Cero</h3>
+              <p>Desarrollamos propuestas completas adaptadas a tus necesidades, terreno y presupuesto.</p>
+            </article>
+            <article class="service">
+              <h3>Remodelaciones y Ampliaciones</h3>
+              <p>Transformamos espacios existentes para mejorar su funcionalidad, confort y valor.</p>
+            </article>
+            <article class="service">
+              <h3>Interiorismo y Decoración</h3>
+              <p>Diseñamos ambientes con criterio estético, materiales adecuados y personalidad propia.</p>
+            </article>
+            <article class="service">
+              <h3>Dirección Técnica de Obra</h3>
+              <p>Supervisamos cada etapa para asegurar calidad constructiva y cumplimiento de plazos.</p>
+            </article>
+            <article class="service">
+              <h3>Relevamientos</h3>
+              <p>Tomamos medidas y diagnóstico técnico como base para proyectos confiables.</p>
+            </article>
+            <article class="service">
+              <h3>Asesoramiento Técnico</h3>
+              <p>Resolvemos dudas específicas para que tomes decisiones informadas antes de invertir.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="proceso" class="section">
+        <div class="container">
+          <h2 class="section-title">Cómo Trabajamos</h2>
+          <p class="section-subtitle">
+            Un proceso claro para que disfrutes cada etapa y llegues al resultado que imaginás.
+          </p>
+
+          <div class="process">
+            <article class="step">
+              <span>Paso 01</span>
+              <h4>Escuchamos tu idea</h4>
+              <p>Analizamos tus objetivos, estilo de vida y necesidades del espacio.</p>
+            </article>
+            <article class="step">
+              <span>Paso 02</span>
+              <h4>Diseñamos tu proyecto</h4>
+              <p>Traducimos tu visión en propuestas arquitectónicas viables y personalizadas.</p>
+            </article>
+            <article class="step">
+              <span>Paso 03</span>
+              <h4>Ejecutamos con detalle</h4>
+              <p>Acompañamos obra y decisiones para lograr un resultado fiel al diseño.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contacto" class="section">
+        <div class="container contact">
+          <div>
+            <h3>Contactanos y empecemos tu proyecto</h3>
+            <p>
+              Escribinos por WhatsApp para una primera consulta y contanos qué espacio querés transformar.
+              También podés seguirnos en Instagram para ver ideas y obras recientes.
+            </p>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://wa.me/5493624999637" target="_blank" rel="noreferrer">Contactanos +549 362499-9637</a>
+            <a class="btn btn-secondary" href="https://www.instagram.com/espaciounoarquitectura" target="_blank" rel="noreferrer">@espaciounoarquitectura</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">Espacio UNO Arquitectura © <span id="year"></span>. Arquitectura & Deco.</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
